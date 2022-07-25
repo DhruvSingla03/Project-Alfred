@@ -16,14 +16,13 @@ export default function Login() {
     const navigate=useNavigate()
     const [user, loading, error] = useAuthState(auth);
     const [Bg,setBg]=useState('bg-slate-400')
+
+    
     useEffect(() => {
-        if (loading) {
-            
-            return;
-        }
-        if (user) navigate("/dashboard",{replace:true});
         
-    }, [user,loading]);
+        if (user) navigate("/dashboard");
+        
+    }, [user]);
 
     const goBack = () => {
         navigate('/')
