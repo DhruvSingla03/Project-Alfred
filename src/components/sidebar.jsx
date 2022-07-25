@@ -18,11 +18,11 @@ export default function Sidebar() {
         if (!user) {
             navigate('/',{replace:true})
         }
-        
-    }, [user,loading]);
+        if(error) navigate('/',{replace:true})
+    }, [user,loading,error]);
 
     const signout=()=>{
-        logout()
+        logout();
         navigate('/',{replace:true})
     }
 
@@ -52,7 +52,7 @@ export default function Sidebar() {
             </button>
             {Open? 
             <div className={` mt-16 ml-2`}>
-                <img src={user.photoURL} alt="" className="rounded-full full w-6 h-6 md:w-10 md:h-10 inline block"/>
+                <img src={user.photoURL!=null ? user.photoURL:""} alt="" className="rounded-full full w-6 h-6 md:w-10 md:h-10 inline block"/>
                 <span className={`${Item?"":"hidden"} text-sm md:text-lg`}>Welcome {user.displayName}</span>
             </div>
                 :
@@ -63,7 +63,7 @@ export default function Sidebar() {
             <div className="absolute mt-8 top-20 flex justify-center p-1 md:p-2 items-center flex-col gap-2 w-full">
                 <Link to='/dashboard' className="border border-slate-100 rounded-lg w-full px-3 py-1 flex justify-center  items-center gap-1 text-sm md:text-md  "><i className="fa-solid fa-calendar-days"></i><span className={`${Item?"":"hidden"} duration-300 delay-150`}>Active Meetings</span></Link>
                 <Link to='/dashboard/settings' className="border border-slate-100  w-full rounded-lg px-3 py-1 flex justify-center  items-center gap-1 "><i className="fa-solid fa-calendar-check"></i><span className={`${Item?"":"hidden"} duration-300 delay-150`}>all meetings</span></Link>
-                <Link to='/' className="border border-slate-100 rounded-lg px-3 py-1  w-full flex justify-center  items-center gap-1 "><i className="fa-solid fa-gear"></i><span className={`${Item?"":"hidden"} duration-300 delay-150`}>settings</span></Link>
+                <Link to='/dashboard/settings' className="border border-slate-100 rounded-lg px-3 py-1  w-full flex justify-center  items-center gap-1 "><i className="fa-solid fa-gear"></i><span className={`${Item?"":"hidden"} duration-300 delay-150`}>settings</span></Link>
                 <button onClick={signout} className="border border-slate-100 rounded-lg w-full px-3 py-1 flex justify-center  items-center gap-1 "><i className="fa-solid fa-arrow-right-from-bracket"></i><span className={`${Item?"":"hidden"} duration-300 delay-150`}>logout</span></button>
                 
             </div>

@@ -14,9 +14,7 @@ function App() {
   const [user]=useAuthState(auth)
   const navigate=useNavigate()
   useEffect(() => {
-    if(user){
-      navigate("/dashboard",{replace:true})
-    }
+    
   
     
   }, [])
